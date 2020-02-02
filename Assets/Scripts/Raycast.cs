@@ -6,8 +6,6 @@ public class Raycast : MonoBehaviour
 {
 
     public GameObject player;
-    //public float xAngle;
-    //private float Anglex;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +16,7 @@ public class Raycast : MonoBehaviour
     [SerializeField, Range(0f, 20f)]
     public float rayDistance;
 
-    public RaycastHit TheHit;
+    RaycastHit TheHit;
 
     // Update is called once per frame
     void Update()
@@ -26,13 +24,15 @@ public class Raycast : MonoBehaviour
 
         if (CloseObject)
         {
-            Debug.Log("Estás tocando algo.");
+            Debug.Log(TheHit.collider.name);
         }
     }
 
+
     bool CloseObject
     {
-        get => Physics.Raycast(player.transform.position, new Vector3(rayDistance, 0)); 
+
+        get => Physics.Raycast(player.transform.position, new Vector3(rayDistance, 0), out TheHit);
     }
 
     void OnDrawGizmosSelected()

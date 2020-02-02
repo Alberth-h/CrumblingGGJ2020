@@ -8,14 +8,17 @@ using UnityEngine.SceneManagement;
 public class TimerScript : MonoBehaviour
 {
     Image timer;
-    float TimeLeft ;
+
+    
+
+    public float TimeLeft ;
     public float MaxTime = 20f;
     float pipi = 0.3045f;
     public int IsRunning=1;
     public int numerorandom;
 
     public GameObject fire;
-    public GameObject water;
+    public GameObject proa2;
     public GameObject timon;
     public GameObject proa;
     public GameObject valla;
@@ -28,8 +31,8 @@ public class TimerScript : MonoBehaviour
         fire = GameObject.Find("FireBarrel");
         fire.SetActive(false);
 
-        water = GameObject.Find("WaterHole");
-        water.SetActive(false);
+        proa2 = GameObject.Find("FireProa2");
+        proa2.SetActive(false);
 
         timon = GameObject.Find("rueda");
         timon.transform.Rotate(0, 0, 0);
@@ -40,7 +43,7 @@ public class TimerScript : MonoBehaviour
 
         valla = GameObject.Find("/Boat/Fences/Fence06");
 
-        valla = GameObject.Find("/Boat/Fences/Fence09");
+        valla2 = GameObject.Find("/Boat/Fences/Fence09");
 
 
         numerorandom = UnityEngine.Random.Range(0, 6);
@@ -56,16 +59,27 @@ public class TimerScript : MonoBehaviour
     {
         if (TimeLeft > 0)
         {
-            TimeLeft -= Time.deltaTime;
-            timer.transform.Rotate(0, 0, -pipi);
+            TimeLeft -= Time.deltaTime ;
+            TimeLeft += MovPlayer.additive;
 
- 
+            if (MovPlayer.additive == 1f)
+            {
+                timer.transform.Rotate(0, 0, pipi * 59f);
+                Debug.Log("1 segundo");
+            }
+            else if (MovPlayer.additive == 0f)
+            {
+                timer.transform.Rotate(0, 0, -pipi);
+            }
+           // Debug.Log(TimeLeft);
+            MovPlayer.additive = 0f;
+
         }
 
         if(TimeLeft<=0)
         {
            
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
 
  
@@ -87,11 +101,11 @@ public class TimerScript : MonoBehaviour
                     break;
                 case 1:
                     Debug.Log("Hoyo en el barco");
-                    water.SetActive(true);
+                    proa2.SetActive(true);
                     break;
                 case 2:
                     Debug.Log("Timon caido");
-                    timon.transform.Rotate(0, 90, -91);
+                    timon.transform.rotation = Quaternion.Euler(90f,0f,-94f);
                     timon.transform.position = new Vector3(0, 1.7f, 10);
                     break;
                 case 3:
@@ -100,12 +114,12 @@ public class TimerScript : MonoBehaviour
                     break;
                 case 4:
                     Debug.Log("valla caida");
-                    valla.transform.Rotate(40, 20, 0);
-                    
+                    valla.transform.rotation = Quaternion.Euler(-60f, -67f, 222f);
+
                     break;
                 case 5:
                     Debug.Log("valla caida dos");
-                    valla.transform.Rotate(40, 20, 0);
+                    valla2.transform.rotation = Quaternion.Euler(147f, 20f, -47f);
                     break;
                 default:
                     break;

@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - timon
+  - valla
+  - valla2
+  - fire
   layers:
   - Default
   - TransparentFX
@@ -14,11 +18,11 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
-  - 
+  - fire
+  - water
+  - "tim\xF3n"
+  - valla
+  - valla2
   - 
   - 
   - 

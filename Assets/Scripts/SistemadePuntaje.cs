@@ -5,31 +5,20 @@ using UnityEngine.UI;
 
 public class SistemadePuntaje : MonoBehaviour
 {
-    public static int Score = 0;
-    public string ScoreString = "Score";
-
+    public static int ScoreValue = 0;
+  
     public Text TextScore;
 
-    public static SistemadePuntaje sistemadePuntaje;
-    
-    void Awake()
-    {
-        sistemadePuntaje = this;
-    }
-    
     // Start is called before the first frame update
     void Start()
     {
-        
+        TextScore = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (TextScore != null)
-        {
-            TextScore.text = ScoreString + Score.ToString();     
-        }
+        TextScore.text = "SCORE: " + ScoreValue;
 
         
     }
