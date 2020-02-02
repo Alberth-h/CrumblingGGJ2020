@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MovPlayer : MonoBehaviour
 {
     public float gravity = 9.8f;
@@ -9,6 +10,11 @@ public class MovPlayer : MonoBehaviour
     public float horizontalMove;
     public float verticalMove;
     public CharacterController player;
+    public Animation walk;
+
+    public GameObject screwdriver;
+    public GameObject extinguisher;
+    public GameObject hammer;
 
     private Vector3 playerInput;
 
@@ -23,6 +29,9 @@ public class MovPlayer : MonoBehaviour
     void Start()
     {
         player = GetComponent<CharacterController>();
+        screwdriver.gameObject.SetActive(false);
+        extinguisher.gameObject.SetActive(false);
+        hammer.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,6 +39,26 @@ public class MovPlayer : MonoBehaviour
     {
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            screwdriver.gameObject.SetActive(true);
+            hammer.gameObject.SetActive(false);
+            extinguisher.gameObject.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            hammer.gameObject.SetActive(true);
+            screwdriver.gameObject.SetActive(false);
+            extinguisher.gameObject.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse2))
+        {
+            extinguisher.gameObject.SetActive(true);
+            screwdriver.gameObject.SetActive(false);
+            hammer.gameObject.SetActive(false);
+        }
+
 
         camDirection();
 
