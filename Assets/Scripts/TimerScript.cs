@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerScript : MonoBehaviour
 {
-
     Image timer;
     float TimeLeft ;
     public float MaxTime = 20f;
@@ -29,9 +29,10 @@ public class TimerScript : MonoBehaviour
             timer.transform.Rotate(0, 0, -pipi); 
         }
 
-        else
+        if(TimeLeft<=0)
         {
-            Time.timeScale = 0;
+           
+            SceneManager.LoadScene(1);
         }
     }
     
