@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class MovPlayer : MonoBehaviour
 {
 
     public float horizontalMove;
@@ -13,8 +13,6 @@ public class Player : MonoBehaviour
 
     public float playerSpeed;
     private Vector3 movePlayer;
-    public float gravity = 9.8f;
-    public float fallVelocity;
 
     public Camera mainCamera;
     private Vector3 camForward;
@@ -34,14 +32,13 @@ public class Player : MonoBehaviour
 
         camDirection();
 
-        playerInput = new Vector3(horizontalMove, 0f, verticalMove);
-        playerInput = Vector3.ClampMagnitude(playerInput, 1f);
+        playerInput = new Vector3(horizontalMove, 0, verticalMove);
+        playerInput = Vector3.ClampMagnitude(playerInput, 1);
     }
 
     private void FixedUpdate()
     {
         movePlayer = playerInput.x * camRight + playerInput.z * camForward;
-        setGravity();
         player.transform.LookAt(player.transform.position + movePlayer);
         player.Move(movePlayer * playerSpeed);
 
@@ -52,24 +49,11 @@ public class Player : MonoBehaviour
         camForward = mainCamera.transform.forward;
         camRight = mainCamera.transform.right;
 
-        camForward.y = 0f;
-        camRight.y = 0f;
+        camForward.y = 0;
+        camRight.y = 0;
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
     }
 
-    void setGravity()
-    {
-        if (player.isGrounded)
-        {
-            fallVelocity = -gravity * Time.deltaTime;
-            movePlayer.y = fallVelocity;
-        }
-        else
-        { 
-            fallVelocity -= gravity * Time.deltaTime;
-            movePlayer.y = fallVelocity;
-        }
-    }
 }
