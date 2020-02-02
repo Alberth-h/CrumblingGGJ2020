@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovPlayer : MonoBehaviour
 {
+    public float gravity = 9.8f;
 
     public float horizontalMove;
     public float verticalMove;
@@ -34,14 +35,14 @@ public class MovPlayer : MonoBehaviour
 
         playerInput = new Vector3(horizontalMove, 0, verticalMove);
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
-    }
 
+    }
     private void FixedUpdate()
     {
         movePlayer = playerInput.x * camRight + playerInput.z * camForward;
         player.transform.LookAt(player.transform.position + movePlayer);
+        SetGravity();
         player.Move(movePlayer * playerSpeed);
-
     }
 
     void camDirection()
@@ -54,6 +55,11 @@ public class MovPlayer : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
+    }
+
+    void SetGravity()
+    {
+        movePlayer.y = -gravity * Time.deltaTime;
     }
 
 }
